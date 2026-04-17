@@ -29,6 +29,6 @@ class AppTextStyles {
 
   static TextStyle get caption => GoogleFonts.inter(
     fontSize: 12,
-    color: AppColors.body.withOpacity(0.7),
+    color: AppColors.body.withValues(alpha: 0.7),
   );
 }

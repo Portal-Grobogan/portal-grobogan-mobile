@@ -12,7 +12,7 @@ class AppTheme {
         seedColor: AppColors.primary,
         primary: AppColors.primary,
         secondary: AppColors.accent,
-        background: AppColors.siteBg,
+        surface: AppColors.siteBg,
       ),
       textTheme: TextTheme(
         displayLarge: AppTextStyles.h1,

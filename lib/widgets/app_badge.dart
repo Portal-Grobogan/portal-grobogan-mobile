@@ -36,7 +36,6 @@ class AppBadge extends StatelessWidget {
         textColor = const Color(0xFF134429); 
         break;
       case BadgeType.neutral:
-      default:
         bgColor = Colors.grey.shade200;
         textColor = Colors.grey.shade800;
         break;
