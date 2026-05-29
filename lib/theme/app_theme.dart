@@ -1,35 +1,74 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 import 'app_text_styles.dart';
 
 class AppTheme {
-  static ThemeData get lightTheme {
-    return ThemeData(
-      useMaterial3: true,
-      primaryColor: AppColors.primary,
-      scaffoldBackgroundColor: AppColors.siteBg,
-      colorScheme: ColorScheme.fromSeed(
-        seedColor: AppColors.primary,
-        primary: AppColors.primary,
-        secondary: AppColors.accent,
-        surface: AppColors.siteBg,
+  static ThemeData lightTheme = ThemeData(
+    useMaterial3: true,
+    
+    colorScheme: const ColorScheme.light(
+      primary: AppColors.electricBlue,
+      onPrimary: AppColors.white,
+      secondary: AppColors.accentGold,
+      surface: AppColors.white,
+      error: AppColors.danger,
+    ),
+    
+    scaffoldBackgroundColor: AppColors.offWhite,
+    
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColors.white,
+      elevation: 0,
+      centerTitle: false,
+      titleTextStyle: AppTextStyles.headingLarge,
+      iconTheme: const IconThemeData(color: AppColors.charcoal),
+    ),
+    
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: AppColors.white,
+      selectedItemColor: AppColors.electricBlue,
+      unselectedItemColor: AppColors.gray500,
+      selectedLabelStyle: GoogleFonts.inter(
+        fontSize: 12,
+        fontWeight: FontWeight.w600,
       ),
-      textTheme: TextTheme(
-        displayLarge: AppTextStyles.h1,
-        displayMedium: AppTextStyles.h2,
-        displaySmall: AppTextStyles.h3,
-        bodyLarge: AppTextStyles.body.copyWith(fontSize: 16),
-        bodyMedium: AppTextStyles.body,
-        labelSmall: AppTextStyles.caption,
-        titleLarge: AppTextStyles.displayBold.copyWith(fontSize: 18),
+      unselectedLabelStyle: GoogleFonts.inter(
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
       ),
-      appBarTheme: AppBarTheme(
-        backgroundColor: Colors.white,
-        foregroundColor: AppColors.charcoal,
-        elevation: 0,
-        centerTitle: true,
-        titleTextStyle: AppTextStyles.displayBold.copyWith(fontSize: 18),
+      type: BottomNavigationBarType.fixed,
+      elevation: 8,
+    ),
+    
+    cardTheme: CardThemeData(
+      color: AppColors.white,
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: const BorderSide(color: AppColors.gray200, width: 1),
       ),
-    );
-  }
+    ),
+    
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: AppColors.white,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: const BorderSide(color: AppColors.gray200),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: const BorderSide(color: AppColors.gray200),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: const BorderSide(color: AppColors.electricBlue, width: 2),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(12),
+        borderSide: const BorderSide(color: AppColors.danger),
+      ),
+    ),
+  );
 }

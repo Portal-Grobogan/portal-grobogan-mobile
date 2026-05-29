@@ -1,34 +1,42 @@
 class Pariwisata {
-  final String id;
-  final String nama;
-  final String alamat;
-  final String? deskripsi;
-  final String? imageUrl;
-  final String kategori;
-  final double? lat;
-  final double? lng;
-
   const Pariwisata({
     required this.id,
     required this.nama,
+    required this.deskripsi,
     required this.alamat,
-    this.deskripsi,
-    this.imageUrl,
+    required this.fotoUrls,
     required this.kategori,
-    this.lat,
-    this.lng,
+    required this.lat,
+    required this.lng,
   });
 
-  factory Pariwisata.fromJson(Map<String, dynamic> json) {
+  final String id;
+  final String nama;
+  final String? deskripsi;
+  final String? alamat;
+  final List<String> fotoUrls;
+  final String? kategori;
+  final double? lat;
+  final double? lng;
+
+  factory Pariwisata.fromJson(Map<String, dynamic> map) {
+    List<String> parseFotoUrls(dynamic data) {
+      if (data == null) return [];
+      if (data is List) {
+        return data.map((e) => e.toString()).toList();
+      }
+      return [];
+    }
+
     return Pariwisata(
-      id: json['id'].toString(),
-      nama: json['nama'].toString(),
-      alamat: json['alamat'].toString(),
-      deskripsi: json['deskripsi']?.toString(),
-      imageUrl: json['image_url']?.toString(),
-      kategori: json['kategori']?.toString() ?? 'Umum',
-      lat: _tryParseDouble(json['lat']),
-      lng: _tryParseDouble(json['lng']),
+      id: (map['id'] ?? '').toString(),
+      nama: (map['nama'] ?? '').toString(),
+      deskripsi: map['deskripsi']?.toString(),
+      alamat: map['alamat']?.toString(),
+      fotoUrls: parseFotoUrls(map['foto_urls']),
+      kategori: map['kategori']?.toString(),
+      lat: _tryParseDouble(map['lat']),
+      lng: _tryParseDouble(map['lng']),
     );
   }
 }

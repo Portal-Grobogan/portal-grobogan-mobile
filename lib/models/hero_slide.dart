@@ -17,9 +17,9 @@ class HeroSlide {
     return HeroSlide(
       id: json['id'].toString(),
       imageUrl: json['image_url'].toString(),
-      title: json['title'].toString(),
-      subtitle: json['subtitle'].toString(),
-      linkUrl: json['link_url'].toString(),
+      title: json['judul'].toString(),
+      subtitle: (json['deskripsi'] ?? '').toString(),
+      linkUrl: json['link_url']?.toString() ?? '',
     );
   }
 }

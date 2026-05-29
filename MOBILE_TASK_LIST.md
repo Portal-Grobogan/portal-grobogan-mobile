@@ -1305,23 +1305,23 @@ class BerandaScreen extends ConsumerWidget {
 }
 ```
 
-- [ ] Buat `lib/screens/beranda/beranda_screen.dart`
-- [ ] Implement semua sections
+- [x] Buat `lib/screens/beranda/beranda_screen.dart`
+- [x] Implement semua sections
 
 ### 7.2 LayananScreen
 
-- [ ] Buat `lib/screens/layanan/layanan_screen.dart`
-- [ ] Grid 2 columns, search bar
-- [ ] Filter dinamis
+- [x] Buat `lib/screens/layanan/layanan_screen.dart`
+- [x] Grid 2 columns, search bar
+- [x] Filter dinamis
 
 ### 7.3 LayananDetailScreen (Kebencanaan)
 
-- [ ] Buat `lib/screens/layanan/kebencanaan_screen.dart`
-- [ ] Hero section inverted (dark background)
-- [ ] Realtime stream `bencanaStreamProvider`
-- [ ] List DisasterAlert cards dengan color-coding
-- [ ] Empty state jika tidak ada alert
-- [ ] Kontak darurat cards
+- [x] Buat `lib/screens/layanan/kebencanaan_screen.dart`
+- [x] Hero section inverted (dark background)
+- [x] Realtime stream `bencanaStreamProvider`
+- [x] List DisasterAlert cards dengan color-coding
+- [x] Empty state jika tidak ada alert
+- [x] Kontak darurat cards
 
 ### 7.4 PengaduanScreen (Form)
 
@@ -1409,24 +1409,24 @@ class _PengaduanScreenState extends ConsumerState<PengaduanScreen> {
 }
 ```
 
-- [ ] Buat `lib/screens/pengaduan/pengaduan_screen.dart`
-- [ ] Validasi semua field
-- [ ] File picker untuk lampiran
-- [ ] Submit dengan loading state
+- [x] Buat `lib/screens/pengaduan/pengaduan_screen.dart`
+- [x] Validasi semua field
+- [x] File picker untuk lampiran
+- [x] Submit dengan loading state
 
 ### 7.5 PengaduanSuksesScreen
 
-- [ ] Buat `lib/screens/pengaduan/pengaduan_sukses_screen.dart`
-- [ ] Centered layout dengan icon success
-- [ ] ID pengaduan dengan tombol copy
-- [ ] Buttons: "Kembali ke Beranda", "Cek Status"
+- [x] Buat `lib/screens/pengaduan/pengaduan_sukses_screen.dart`
+- [x] Centered layout dengan icon success
+- [x] ID pengaduan dengan tombol copy
+- [x] Buttons: "Kembali ke Beranda", "Cek Status"
 
 ### 7.6 PengaduanCekScreen
 
-- [ ] Buat `lib/screens/pengaduan/pengaduan_cek_screen.dart`
-- [ ] Input ID + button "Cek Status"
-- [ ] Tampilkan detail pengaduan dengan badge status
-- [ ] Empty state jika ID tidak ditemukan
+- [x] Buat `lib/screens/pengaduan/pengaduan_cek_screen.dart`
+- [x] Input ID + button "Cek Status"
+- [x] Tampilkan detail pengaduan dengan badge status
+- [x] Empty state jika ID tidak ditemukan
 
 ### 7.7 BeritaScreen (Tabs)
 
@@ -1458,9 +1458,9 @@ class BeritaScreen extends StatelessWidget {
 }
 ```
 
-- [ ] Buat `lib/screens/berita/berita_screen.dart`
-- [ ] Tabs dengan Material TabBar
-- [ ] Lazy load pagination di kedua tabs
+- [x] Buat `lib/screens/berita/berita_screen.dart`
+- [x] Tabs dengan Material TabBar
+- [x] Lazy load pagination di kedua tabs
 
 ### 7.8 BeritaDetailScreen
 
@@ -1555,25 +1555,25 @@ class BeritaDetailScreen extends ConsumerWidget {
 }
 ```
 
-- [ ] Buat `lib/screens/berita/berita_detail_screen.dart`
-- [ ] SliverAppBar dengan parallax image
-- [ ] Rounded top content card
-- [ ] Render HTML dengan `flutter_html`
-- [ ] Share button
+- [x] Buat `lib/screens/berita/berita_detail_screen.dart`
+- [x] SliverAppBar dengan parallax image
+- [x] Rounded top content card
+- [x] Render HTML dengan `flutter_html`
+- [x] Share button
 
 ### 7.9 PariwisataScreen
 
-- [ ] Buat `lib/screens/pariwisata/pariwisata_screen.dart`
-- [ ] Hero section gradient Electric Blue
-- [ ] Grid 2 columns destinasi
-- [ ] DestinasiCard dengan image + nama + alamat
+- [x] Buat `lib/screens/pariwisata/pariwisata_screen.dart`
+- [x] Hero section gradient Electric Blue
+- [x] Grid 2 columns destinasi
+- [x] DestinasiCard dengan image + nama + alamat
 
 ### 7.10 ProfilScreen
 
-- [ ] Buat `lib/screens/profil/profil_screen.dart`
-- [ ] Static content: logo, sejarah, visi-misi, kontak
-- [ ] App version + build number di footer
-- [ ] Links: Ketentuan Layanan, Kebijakan Privasi
+- [x] Buat `lib/screens/profil/profil_screen.dart`
+- [x] Static content: logo, sejarah, visi-misi, kontak
+- [x] App version + build number di footer
+- [x] Links: Ketentuan Layanan, Kebijakan Privasi
 
 ---
 
