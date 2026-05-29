@@ -21,7 +21,7 @@ class Berita {
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
-  factory Berita.fromMap(Map<String, dynamic> map) {
+  factory Berita.fromJson(Map<String, dynamic> map) {
     return Berita(
       id: (map['id'] ?? '').toString(),
       judul: (map['judul'] ?? '').toString(),

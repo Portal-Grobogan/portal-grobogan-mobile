@@ -1,52 +1,32 @@
 import 'dart:io';
-
 import 'package:supabase_flutter/supabase_flutter.dart';
-
 import '../models/pengaduan.dart';
 
 class PengaduanService {
   PengaduanService(this._client);
-
   final SupabaseClient _client;
 
-  /// Upload lampiran (opsional) ke bucket `pengaduan-lampiran` (private).
-  /// Mengembalikan storage path (bukan URL publik).
-  Future<String> uploadLampiran({
-    required File file,
-    required String pengaduanId,
-  }) async {
-    final ext = _safeFileExt(file.path);
-    final storagePath = '$pengaduanId/lampiran$ext';
-
-    await _client.storage.from('pengaduan-lampiran').upload(
-          storagePath,
-          file,
-          fileOptions: const FileOptions(upsert: true),
-        );
-
-    return storagePath;
-  }
-
-  Future<Pengaduan> createPengaduan({
-    required String namaPelapor,
+  Future<String> submitPengaduan({
+    required String nama,
     required String email,
-    String? nomorHp,
+    required String nomorHp,
     required String kategori,
     required String judul,
     required String deskripsi,
-    File? lampiranFile,
+    File? lampiran,
   }) async {
-    // Insert dulu supaya dapat id pengaduan untuk path storage.
+    String? lampiranUrl;
+    // Insert dulu
     final inserted = await _client
         .from('pengaduan')
         .insert({
-          'nama_pelapor': namaPelapor,
+          'nama_pelapor': nama,
           'email': email,
           'nomor_hp': nomorHp,
           'kategori': kategori,
           'judul': judul,
           'deskripsi': deskripsi,
-          'status': 'baru',
+          'status': 'diterima',
         })
         .select()
         .single();
@@ -54,41 +34,28 @@ class PengaduanService {
     final insertedMap = (inserted as Map).cast<String, dynamic>();
     final pengaduanId = (insertedMap['id'] ?? '').toString();
 
-    if (lampiranFile != null) {
-      final storagePath = await uploadLampiran(
-        file: lampiranFile,
-        pengaduanId: pengaduanId,
-      );
+    if (lampiran != null) {
+      final ext = _safeFileExt(lampiran.path);
+      final storagePath = '$pengaduanId/lampiran$ext';
 
-      final updated = await _client
+      await _client.storage.from('pengaduan-lampiran').upload(
+            storagePath,
+            lampiran,
+            fileOptions: const FileOptions(upsert: true),
+          );
+
+      await _client
           .from('pengaduan')
           .update({'lampiran_url': storagePath})
-          .eq('id', pengaduanId)
-          .select()
-          .single();
-
-      return Pengaduan.fromMap((updated as Map).cast<String, dynamic>());
+          .eq('id', pengaduanId);
     }
-
-    return Pengaduan.fromMap(insertedMap);
+    return pengaduanId;
   }
 
-  Future<Pengaduan?> fetchById(String id) async {
+  Future<Pengaduan?> cekStatus(String id) async {
     final data = await _client.from('pengaduan').select().eq('id', id).maybeSingle();
     if (data == null) return null;
-    return Pengaduan.fromMap((data as Map).cast<String, dynamic>());
-  }
-
-  /// Realtime stream perubahan pengaduan tertentu.
-  Stream<Pengaduan?> watchById(String id) {
-    return _client
-        .from('pengaduan')
-        .stream(primaryKey: ['id'])
-        .eq('id', id)
-        .map((rows) {
-          if (rows.isEmpty) return null;
-          return Pengaduan.fromMap(rows.first);
-        });
+    return Pengaduan.fromJson((data as Map).cast<String, dynamic>());
   }
 }
 
@@ -99,4 +66,3 @@ String _safeFileExt(String path) {
   if (ext.length > 10) return '';
   return ext;
 }
-

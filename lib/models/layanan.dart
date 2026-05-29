@@ -19,7 +19,7 @@ class Layanan {
   final int? urutan;
   final bool? aktif;
 
-  factory Layanan.fromMap(Map<String, dynamic> map) {
+  factory Layanan.fromJson(Map<String, dynamic> map) {
     return Layanan(
       id: (map['id'] ?? '').toString(),
       nama: (map['nama'] ?? '').toString(),
