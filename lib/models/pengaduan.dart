@@ -27,7 +27,7 @@ class Pengaduan {
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
-  factory Pengaduan.fromMap(Map<String, dynamic> map) {
+  factory Pengaduan.fromJson(Map<String, dynamic> map) {
     return Pengaduan(
       id: (map['id'] ?? '').toString(),
       namaPelapor: map['nama_pelapor']?.toString(),

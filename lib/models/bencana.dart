@@ -21,7 +21,7 @@ class Bencana {
   final bool? aktif;
   final DateTime? createdAt;
 
-  factory Bencana.fromMap(Map<String, dynamic> map) {
+  factory Bencana.fromJson(Map<String, dynamic> map) {
     return Bencana(
       id: (map['id'] ?? '').toString(),
       judul: map['judul']?.toString(),
