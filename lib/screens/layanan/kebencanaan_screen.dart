@@ -16,26 +16,25 @@ class KebencanaanScreen extends ConsumerWidget {
     final bencanaStream = ref.watch(bencanaStreamProvider);
 
     return Scaffold(
-      backgroundColor: AppColors.charcoal,
       appBar: AppBar(
-        title: Text('Pusat Kebencanaan', style: AppTextStyles.headingLarge.copyWith(color: AppColors.white)),
-        backgroundColor: AppColors.charcoal,
-        iconTheme: const IconThemeData(color: AppColors.white),
+        title: Text('Pusat Kebencanaan', style: AppTextStyles.headingLarge),
+        backgroundColor: AppColors.white,
+        foregroundColor: AppColors.charcoal,
       ),
       body: Column(
         children: [
           Container(
             padding: AppDimensions.screenPadding,
-            color: AppColors.charcoalLight,
+            color: AppColors.white,
             width: double.infinity,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Peringatan Darurat', style: AppTextStyles.displayMedium.copyWith(color: AppColors.white)),
+                Text('Peringatan Darurat', style: AppTextStyles.displayMedium),
                 const SizedBox(height: 8),
                 Text(
                   'Pantauan situasi darurat dan kebencanaan terkini di Kabupaten Grobogan. Tetap waspada dan ikuti arahan petugas.',
-                  style: AppTextStyles.bodyMedium.copyWith(color: AppColors.gray200),
+                  style: AppTextStyles.bodyMedium.copyWith(color: AppColors.gray500),
                 ),
               ],
             ),
@@ -60,7 +59,7 @@ class KebencanaanScreen extends ConsumerWidget {
                   },
                 );
               },
-              loading: () => const Center(child: CircularProgressIndicator(color: AppColors.white)),
+              loading: () => const Center(child: CircularProgressIndicator()),
               error: (e, _) => Center(child: Text('Gagal memuat data: $e', style: const TextStyle(color: AppColors.danger))),
             ),
           ),

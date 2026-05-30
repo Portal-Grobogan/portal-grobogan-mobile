@@ -67,7 +67,7 @@ class _PengaduanScreenState extends ConsumerState<PengaduanScreen> {
 
     if (id != null) {
       HapticFeedback.mediumImpact();
-      if (mounted) context.go('/layanan/pengaduan/sukses/$id');
+      if (mounted) context.go('/pengaduan/sukses/$id');
     } else {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -196,7 +196,7 @@ class _PengaduanScreenState extends ConsumerState<PengaduanScreen> {
             const SizedBox(height: AppDimensions.spacing16),
             
             TextButton(
-              onPressed: () => context.push('/layanan/pengaduan/cek'),
+              onPressed: () => context.push('/pengaduan/cek'),
               child: Text('Sudah lapor? Cek status di sini', style: AppTextStyles.labelMedium.copyWith(color: AppColors.electricBlue)),
             ),
           ],

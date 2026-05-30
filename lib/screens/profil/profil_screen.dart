@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../theme/app_colors.dart';
 import '../../theme/app_dimensions.dart';
@@ -45,11 +46,11 @@ class ProfilScreen extends StatelessWidget {
           AppCard(
             child: Column(
               children: [
-                _buildListTile(Icons.info_outline, 'Visi & Misi'),
+                _buildListTile(context, Icons.info_outline, 'Visi & Misi'),
                 const Divider(height: 1),
-                _buildListTile(Icons.history, 'Sejarah Singkat'),
+                _buildListTile(context, Icons.history, 'Sejarah Singkat'),
                 const Divider(height: 1),
-                _buildListTile(Icons.people_outline, 'Struktur Organisasi'),
+                _buildListTile(context, Icons.people_outline, 'Struktur Organisasi'),
               ],
             ),
           ),
@@ -61,11 +62,11 @@ class ProfilScreen extends StatelessWidget {
           AppCard(
             child: Column(
               children: [
-                _buildListTile(Icons.phone, 'Hubungi Kami'),
+                _buildListTile(context, Icons.phone, 'Hubungi Kami'),
                 const Divider(height: 1),
-                _buildListTile(Icons.help_outline, 'FAQ'),
+                _buildListTile(context, Icons.help_outline, 'FAQ'),
                 const Divider(height: 1),
-                _buildListTile(Icons.shield_outlined, 'Kebijakan Privasi'),
+                _buildListTile(context, Icons.shield_outlined, 'Kebijakan Privasi'),
               ],
             ),
           ),
@@ -83,13 +84,15 @@ class ProfilScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildListTile(IconData icon, String title) {
+  Widget _buildListTile(BuildContext context, IconData icon, String title) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       leading: Icon(icon, color: AppColors.gray500),
       title: Text(title, style: AppTextStyles.bodyMedium),
       trailing: const Icon(Icons.chevron_right, color: AppColors.gray500),
-      onTap: () {},
+      onTap: () {
+        context.go('/profil/detail/${Uri.encodeComponent(title)}');
+      },
     );
   }
 }

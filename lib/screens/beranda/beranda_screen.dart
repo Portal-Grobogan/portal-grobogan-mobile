@@ -6,6 +6,7 @@ import '../../providers/hero_slides_provider.dart';
 import '../../providers/layanan_provider.dart';
 import '../../providers/berita_provider.dart';
 import '../../providers/bencana_provider.dart';
+import '../../providers/notification_store_provider.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/app_dimensions.dart';
 import '../../theme/app_text_styles.dart';
@@ -15,6 +16,7 @@ import '../../widgets/news_card.dart';
 import '../../widgets/disaster_alert.dart';
 import '../../widgets/skeleton_loader.dart';
 import '../../widgets/empty_state.dart';
+import '../../widgets/layanan_detail_sheet.dart';
 
 class BerandaScreen extends ConsumerWidget {
   const BerandaScreen({super.key});
@@ -25,6 +27,10 @@ class BerandaScreen extends ConsumerWidget {
     final layanan = ref.watch(semuaLayananProvider);
     final berita = ref.watch(beritaTerbaruProvider);
     final bencana = ref.watch(bencanaStreamProvider);
+    
+    // Watch the state so the widget rebuilds when notifications change
+    final notifications = ref.watch(notificationStoreProvider);
+    final unreadCount = notifications.where((n) => !n.isRead).length;
 
     return Scaffold(
       appBar: AppBar(
@@ -38,9 +44,39 @@ class BerandaScreen extends ConsumerWidget {
         backgroundColor: AppColors.electricBlue,
         iconTheme: const IconThemeData(color: AppColors.white),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications_none),
-            onPressed: () {},
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.notifications_none),
+                onPressed: () => context.push('/notifikasi'),
+              ),
+              if (unreadCount > 0)
+                Positioned(
+                  right: 12,
+                  top: 12,
+                  child: Container(
+                    padding: const EdgeInsets.all(2),
+                    decoration: BoxDecoration(
+                      color: AppColors.danger,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    constraints: const BoxConstraints(
+                      minWidth: 16,
+                      minHeight: 16,
+                    ),
+                    child: Text(
+                      unreadCount > 99 ? '99+' : unreadCount.toString(),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+            ],
           ),
         ],
       ),
@@ -119,8 +155,10 @@ class BerandaScreen extends ConsumerWidget {
                               context.go('/layanan/pariwisata');
                             } else if ((displayList[index].kategori ?? '').toLowerCase() == 'kebencanaan') {
                               context.go('/layanan/kebencanaan');
+                            } else if ((displayList[index].kategori ?? '').toLowerCase() == 'pengaduan') {
+                              context.go('/pengaduan');
                             } else {
-                              // Redirect ke URL eksternal bisa dilakukan di sini
+                              LayananDetailSheet.show(context, displayList[index]);
                             }
                           },
                         );
@@ -199,7 +237,7 @@ class BerandaScreen extends ConsumerWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => context.go('/layanan/pengaduan'),
+        onPressed: () => context.go('/pengaduan'),
         label: const Text('Buat Pengaduan'),
         icon: const Icon(Icons.add_comment),
         backgroundColor: AppColors.electricBlue,

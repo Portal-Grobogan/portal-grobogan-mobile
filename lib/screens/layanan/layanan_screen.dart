@@ -8,6 +8,7 @@ import '../../theme/app_dimensions.dart';
 import '../../theme/app_text_styles.dart';
 import '../../widgets/service_card.dart';
 import '../../widgets/empty_state.dart';
+import '../../widgets/layanan_detail_sheet.dart';
 
 class LayananScreen extends ConsumerStatefulWidget {
   const LayananScreen({super.key});
@@ -80,7 +81,9 @@ class _LayananScreenState extends ConsumerState<LayananScreen> {
                           } else if ((filtered[index].kategori ?? '').toLowerCase() == 'kebencanaan') {
                             context.go('/layanan/kebencanaan');
                           } else if ((filtered[index].kategori ?? '').toLowerCase() == 'pengaduan') {
-                            context.go('/layanan/pengaduan');
+                            context.go('/pengaduan');
+                          } else {
+                            LayananDetailSheet.show(context, filtered[index]);
                           }
                         },
                       );

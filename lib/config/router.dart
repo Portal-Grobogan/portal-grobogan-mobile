@@ -14,6 +14,8 @@ import '../screens/pengaduan/pengaduan_sukses_screen.dart';
 import '../screens/pengaduan/pengaduan_cek_screen.dart';
 import '../screens/pariwisata/pariwisata_screen.dart';
 import '../screens/profil/profil_screen.dart';
+import '../screens/profil/profil_detail_screen.dart';
+import '../screens/notifikasi/notifikasi_screen.dart';
 
 part 'router.g.dart';
 
@@ -49,25 +51,29 @@ GoRouter appRouter(Ref ref) {
                     builder: (context, state) => const KebencanaanScreen(),
                   ),
                   GoRoute(
-                    path: 'pengaduan',
-                    builder: (context, state) => const PengaduanScreen(),
-                    routes: [
-                      GoRoute(
-                        path: 'sukses/:id',
-                        builder: (context, state) {
-                          final id = state.pathParameters['id']!;
-                          return PengaduanSuksesScreen(id: id);
-                        },
-                      ),
-                      GoRoute(
-                        path: 'cek',
-                        builder: (context, state) => const PengaduanCekScreen(),
-                      ),
-                    ],
-                  ),
-                  GoRoute(
                     path: 'pariwisata',
                     builder: (context, state) => const PariwisataScreen(),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/pengaduan',
+                builder: (context, state) => const PengaduanScreen(),
+                routes: [
+                  GoRoute(
+                    path: 'sukses/:id',
+                    builder: (context, state) {
+                      final id = state.pathParameters['id']!;
+                      return PengaduanSuksesScreen(id: id);
+                    },
+                  ),
+                  GoRoute(
+                    path: 'cek',
+                    builder: (context, state) => const PengaduanCekScreen(),
                   ),
                 ],
               ),
@@ -95,10 +101,23 @@ GoRouter appRouter(Ref ref) {
               GoRoute(
                 path: '/profil',
                 builder: (context, state) => const ProfilScreen(),
+                routes: [
+                  GoRoute(
+                    path: 'detail/:title',
+                    builder: (context, state) {
+                      final title = state.pathParameters['title']!;
+                      return ProfilDetailScreen(title: Uri.decodeComponent(title));
+                    },
+                  ),
+                ],
               ),
             ],
           ),
         ],
+      ),
+      GoRoute(
+        path: '/notifikasi',
+        builder: (context, state) => const NotifikasiScreen(),
       ),
     ],
   );

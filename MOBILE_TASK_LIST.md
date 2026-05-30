@@ -1581,6 +1581,18 @@ class BeritaDetailScreen extends ConsumerWidget {
 
 ### 8.1 FCM Initialization
 
+- [x] Create NotificationService
+- [x] Request permission & get token
+
+### 8.2 Subscribe to Topics
+
+- [x] Subscribe to `semua-warga` topic
+
+### 8.3 Handle Notifications
+
+- [x] Foreground notification handler (Snackbar)
+- [x] Background/Terminated tap routing (go_router)
+
 ```dart
 // lib/services/notification_service.dart
 class NotificationService {

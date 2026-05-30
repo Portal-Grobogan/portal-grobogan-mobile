@@ -83,7 +83,7 @@ class PengaduanSuksesScreen extends StatelessWidget {
               AppButton(
                 label: 'Cek Status Sekarang',
                 variant: AppButtonVariant.secondary,
-                onPressed: () => context.push('/layanan/pengaduan/cek'),
+                onPressed: () => context.push('/pengaduan/cek'),
               ),
             ],
           ),

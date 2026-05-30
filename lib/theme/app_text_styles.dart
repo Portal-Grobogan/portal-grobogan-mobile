@@ -3,25 +3,25 @@ import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 
 class AppTextStyles {
-  // Display/Headings - Calistoga
-  static TextStyle displayLarge = GoogleFonts.calistoga(
+  // Display/Headings - Inter
+  static TextStyle displayLarge = GoogleFonts.inter(
     fontSize: 32,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w700,
     height: 1.2,
     letterSpacing: -0.5,
     color: AppColors.charcoal,
   );
   
-  static TextStyle displayMedium = GoogleFonts.calistoga(
+  static TextStyle displayMedium = GoogleFonts.inter(
     fontSize: 24,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w700,
     height: 1.3,
     color: AppColors.charcoal,
   );
   
-  static TextStyle headingLarge = GoogleFonts.calistoga(
+  static TextStyle headingLarge = GoogleFonts.inter(
     fontSize: 20,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w700,
     height: 1.4,
     color: AppColors.charcoal,
   );

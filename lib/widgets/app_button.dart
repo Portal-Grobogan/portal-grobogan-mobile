@@ -29,16 +29,15 @@ class AppButton extends StatelessWidget {
       child: Container(
         height: 48,
         decoration: BoxDecoration(
-          gradient: variant == AppButtonVariant.primary 
-            ? AppColors.primaryGradient 
-            : null,
-          color: _getBackgroundColor(),
+          color: onPressed == null && !isLoading
+            ? AppColors.gray200
+            : _getBackgroundColor(),
           borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
-          boxShadow: variant == AppButtonVariant.primary 
+          boxShadow: variant == AppButtonVariant.primary && onPressed != null
             ? AppDimensions.shadowBlue 
             : null,
           border: variant == AppButtonVariant.secondary
-            ? Border.all(color: AppColors.electricBlue, width: 2)
+            ? Border.all(color: onPressed == null ? AppColors.gray200 : AppColors.electricBlue, width: 2)
             : null,
         ),
         child: Material(
@@ -81,12 +80,17 @@ class AppButton extends StatelessWidget {
         return Colors.transparent;
       case AppButtonVariant.danger:
         return AppColors.danger;
+      case AppButtonVariant.primary:
+        return AppColors.electricBlue;
       default:
-        return Colors.transparent;
+        return AppColors.electricBlue;
     }
   }
   
   Color _getTextColor() {
+    if (onPressed == null && !isLoading) {
+      return AppColors.gray500;
+    }
     return variant == AppButtonVariant.secondary 
       ? AppColors.electricBlue 
       : AppColors.white;
