@@ -124,15 +124,15 @@ class NotifikasiScreen extends ConsumerWidget {
                     
                     // Route to specific page if needed
                     if (notif.type == 'bencana') {
-                      context.push('/layanan/kebencanaan');
+                      context.go('/layanan/kebencanaan');
                     } else if (notif.type == 'berita') {
                       if (notif.slug != null) {
-                        context.push('/berita/${notif.slug}');
+                        context.go('/berita/${notif.slug}');
                       } else {
                         context.go('/berita');
                       }
                     } else if (notif.type == 'pengaduan') {
-                      context.push('/pengaduan/cek');
+                      context.go('/pengaduan/cek');
                     }
                   },
                 );

@@ -122,9 +122,9 @@ class NotificationService {
       case 'pengaduan':
         final id = data['id'];
         if (id != null) {
-          context.push('/pengaduan/sukses/$id');
+          context.go('/pengaduan/sukses/$id');
         } else {
-          context.push('/pengaduan/cek');
+          context.go('/pengaduan/cek');
         }
         break;
       case 'berita':
