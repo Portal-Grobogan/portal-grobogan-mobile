@@ -2,18 +2,12 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/pariwisata.dart';
 
 class PariwisataService {
-  final SupabaseClient _client;
-  
   PariwisataService(this._client);
-  
-  Future<List<Pariwisata>> getAllDestinasi() async {
-    final response = await _client
-      .from('pariwisata')
-      .select()
-      .order('nama', ascending: true);
-    
-    return (response as List)
-      .map((json) => Pariwisata.fromJson(json))
-      .toList();
+  final SupabaseClient _client;
+
+  Future<List<Pariwisata>> getAllPariwisata() async {
+    final data = await _client.from('pariwisata').select().order('created_at', ascending: false);
+    final rows = (data as List).cast<Map<String, dynamic>>();
+    return rows.map(Pariwisata.fromJson).toList();
   }
 }

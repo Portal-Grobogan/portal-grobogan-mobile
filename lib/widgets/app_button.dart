@@ -1,96 +1,102 @@
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
+import '../theme/app_dimensions.dart';
 
-enum AppButtonVariant { primary, accent, outline }
+enum AppButtonVariant { primary, secondary, ghost, danger }
 
 class AppButton extends StatelessWidget {
-  final String text;
-  final VoidCallback onPressed;
+  final String label;
+  final VoidCallback? onPressed;
   final AppButtonVariant variant;
   final bool isLoading;
   final IconData? icon;
-  final bool isFullWidth;
-
+  
   const AppButton({
     super.key,
-    required this.text,
-    required this.onPressed,
+    required this.label,
+    this.onPressed,
     this.variant = AppButtonVariant.primary,
     this.isLoading = false,
     this.icon,
-    this.isFullWidth = false,
   });
-
+  
   @override
   Widget build(BuildContext context) {
-    Color backgroundColor;
-    Color textColor;
-    BorderSide borderSide;
-
-    switch (variant) {
-      case AppButtonVariant.primary:
-        backgroundColor = AppColors.primary;
-        textColor = Colors.white;
-        borderSide = BorderSide.none;
-        break;
-      case AppButtonVariant.accent:
-        backgroundColor = AppColors.accent;
-        textColor = Colors.white;
-        borderSide = BorderSide.none;
-        break;
-      case AppButtonVariant.outline:
-        backgroundColor = Colors.transparent;
-        textColor = AppColors.primary;
-        borderSide = const BorderSide(color: AppColors.primary);
-        break;
-    }
-
-    final buttonContent = isLoading
-        ? SizedBox(
-            width: 20,
-            height: 20,
-            child: CircularProgressIndicator(
-              strokeWidth: 2,
-              color: textColor,
-            ),
-          )
-        : Row(
-            mainAxisSize: isFullWidth ? MainAxisSize.max : MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (icon != null) ...[
-                Icon(icon, size: 20),
-                const SizedBox(width: 8),
-              ],
-              Text(
-                text,
-                style: AppTextStyles.bodyMedium.copyWith(
-                  color: textColor,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
-          );
-
-    final button = ElevatedButton(
-      onPressed: isLoading ? null : onPressed,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: backgroundColor,
-        foregroundColor: textColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-          side: borderSide,
+    return AnimatedScale(
+      scale: onPressed != null ? 1.0 : 0.98,
+      duration: const Duration(milliseconds: 150),
+      child: Container(
+        height: 48,
+        decoration: BoxDecoration(
+          color: onPressed == null && !isLoading
+            ? AppColors.gray200
+            : _getBackgroundColor(),
+          borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
+          boxShadow: variant == AppButtonVariant.primary && onPressed != null
+            ? AppDimensions.shadowBlue 
+            : null,
+          border: variant == AppButtonVariant.secondary
+            ? Border.all(color: onPressed == null ? AppColors.gray200 : AppColors.electricBlue, width: 2)
+            : null,
         ),
-        elevation: variant == AppButtonVariant.outline ? 0 : 2,
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: isLoading ? null : onPressed,
+            borderRadius: BorderRadius.circular(AppDimensions.radiusMedium),
+            child: Center(
+              child: isLoading
+                ? SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      valueColor: AlwaysStoppedAnimation(_getTextColor()),
+                    ),
+                  )
+                : Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (icon != null) ...[
+                        Icon(icon, color: _getTextColor(), size: 20),
+                        const SizedBox(width: 8),
+                      ],
+                      Text(label, style: _getTextStyle()),
+                    ],
+                  ),
+            ),
+          ),
+        ),
       ),
-      child: buttonContent,
     );
-    
-    if (isFullWidth) {
-      return SizedBox(width: double.infinity, child: button);
+  }
+  
+  Color _getBackgroundColor() {
+    switch (variant) {
+      case AppButtonVariant.secondary:
+        return AppColors.white;
+      case AppButtonVariant.ghost:
+        return Colors.transparent;
+      case AppButtonVariant.danger:
+        return AppColors.danger;
+      case AppButtonVariant.primary:
+        return AppColors.electricBlue;
+      default:
+        return AppColors.electricBlue;
     }
-    return button;
+  }
+  
+  Color _getTextColor() {
+    if (onPressed == null && !isLoading) {
+      return AppColors.gray500;
+    }
+    return variant == AppButtonVariant.secondary 
+      ? AppColors.electricBlue 
+      : AppColors.white;
+  }
+  
+  TextStyle _getTextStyle() {
+    return AppTextStyles.buttonText.copyWith(color: _getTextColor());
   }
 }

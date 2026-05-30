@@ -3,32 +3,63 @@ import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 
 class AppTextStyles {
-  // Display font: Montserrat
-  static TextStyle get display => GoogleFonts.montserrat(
+  // Display/Headings - Inter
+  static TextStyle displayLarge = GoogleFonts.inter(
+    fontSize: 32,
+    fontWeight: FontWeight.w700,
+    height: 1.2,
+    letterSpacing: -0.5,
     color: AppColors.charcoal,
   );
-
-  static TextStyle get displayBold => GoogleFonts.montserrat(
-    fontWeight: FontWeight.bold,
+  
+  static TextStyle displayMedium = GoogleFonts.inter(
+    fontSize: 24,
+    fontWeight: FontWeight.w700,
+    height: 1.3,
     color: AppColors.charcoal,
   );
-
-  static TextStyle get h1 => displayBold.copyWith(fontSize: 32);
-  static TextStyle get h2 => displayBold.copyWith(fontSize: 24);
-  static TextStyle get h3 => displayBold.copyWith(fontSize: 20);
-
-  // Body font: Inter
-  static TextStyle get body => GoogleFonts.inter(
-    color: AppColors.body,
+  
+  static TextStyle headingLarge = GoogleFonts.inter(
+    fontSize: 20,
+    fontWeight: FontWeight.w700,
+    height: 1.4,
+    color: AppColors.charcoal,
   );
-
-  static TextStyle get bodyMedium => GoogleFonts.inter(
-    fontWeight: FontWeight.w500,
-    color: AppColors.body,
+  
+  // Body - Inter
+  static TextStyle bodyLarge = GoogleFonts.inter(
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    height: 1.6,
+    color: AppColors.gray900,
   );
-
-  static TextStyle get caption => GoogleFonts.inter(
+  
+  static TextStyle bodyMedium = GoogleFonts.inter(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    height: 1.5,
+    color: AppColors.gray900,
+  );
+  
+  static TextStyle bodySmall = GoogleFonts.inter(
     fontSize: 12,
-    color: AppColors.body.withValues(alpha: 0.7),
+    fontWeight: FontWeight.w400,
+    height: 1.4,
+    color: AppColors.gray500,
+  );
+  
+  // Labels
+  static TextStyle labelMedium = GoogleFonts.inter(
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.3,
+    color: AppColors.gray900,
+  );
+  
+  static TextStyle buttonText = GoogleFonts.inter(
+    fontSize: 15,
+    fontWeight: FontWeight.w600,
+    letterSpacing: 0.2,
+    color: AppColors.white,
   );
 }

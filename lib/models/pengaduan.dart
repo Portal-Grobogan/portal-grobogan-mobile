@@ -3,6 +3,7 @@ class Pengaduan {
     required this.id,
     required this.namaPelapor,
     required this.email,
+    required this.nik,
     required this.nomorHp,
     required this.kategori,
     required this.judul,
@@ -17,6 +18,7 @@ class Pengaduan {
   final String id;
   final String? namaPelapor;
   final String? email;
+  final String? nik;
   final String? nomorHp;
   final String? kategori;
   final String? judul;
@@ -32,6 +34,7 @@ class Pengaduan {
       id: (map['id'] ?? '').toString(),
       namaPelapor: map['nama_pelapor']?.toString(),
       email: map['email']?.toString(),
+      nik: map['nik']?.toString(),
       nomorHp: map['nomor_hp']?.toString(),
       kategori: map['kategori']?.toString(),
       judul: map['judul']?.toString(),

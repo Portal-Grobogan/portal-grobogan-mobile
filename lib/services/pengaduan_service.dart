@@ -9,6 +9,7 @@ class PengaduanService {
   Future<String> submitPengaduan({
     required String nama,
     required String email,
+    required String nik,
     required String nomorHp,
     required String kategori,
     required String judul,
@@ -22,11 +23,12 @@ class PengaduanService {
         .insert({
           'nama_pelapor': nama,
           'email': email,
+          'nik': nik,
           'nomor_hp': nomorHp,
           'kategori': kategori,
           'judul': judul,
           'deskripsi': deskripsi,
-          'status': 'diterima',
+          'status': 'baru',
         })
         .select()
         .single();
@@ -35,19 +37,24 @@ class PengaduanService {
     final pengaduanId = (insertedMap['id'] ?? '').toString();
 
     if (lampiran != null) {
-      final ext = _safeFileExt(lampiran.path);
-      final storagePath = '$pengaduanId/lampiran$ext';
+      try {
+        final ext = _safeFileExt(lampiran.path);
+        final storagePath = '$pengaduanId/lampiran$ext';
 
-      await _client.storage.from('pengaduan-lampiran').upload(
-            storagePath,
-            lampiran,
-            fileOptions: const FileOptions(upsert: true),
-          );
+        await _client.storage.from('pengaduan-lampiran').upload(
+              storagePath,
+              lampiran,
+              fileOptions: const FileOptions(upsert: true),
+            );
 
-      await _client
-          .from('pengaduan')
-          .update({'lampiran_url': storagePath})
-          .eq('id', pengaduanId);
+        await _client
+            .from('pengaduan')
+            .update({'lampiran_url': storagePath})
+            .eq('id', pengaduanId);
+      } catch (e) {
+        print('Warning: Gagal mengupload lampiran: $e');
+        // Kita biarkan lanjut karena data teks pengaduan sudah berhasil tersimpan.
+      }
     }
     return pengaduanId;
   }
