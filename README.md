@@ -63,6 +63,43 @@ flutter run
 
 ---
 
+## 📦 Daftar Library / Dependencies
+
+Berikut adalah seluruh *packages* yang digunakan dalam proyek ini (sesuai `pubspec.yaml`):
+
+### Dependencies (Production)
+| No | Package | Versi | Fungsi |
+|----|---------|-------|--------|
+| 1 | `flutter` | SDK | Framework utama |
+| 2 | `cupertino_icons` | ^1.0.8 | Icon bergaya iOS |
+| 3 | `supabase_flutter` | ^2.12.2 | Backend-as-a-Service (database, auth, storage) |
+| 4 | `firebase_messaging` | ^16.1.3 | Push Notification via FCM |
+| 5 | `firebase_core` | ^4.6.0 | Core Firebase SDK |
+| 6 | `go_router` | ^17.2.0 | Routing / navigasi deklaratif |
+| 7 | `flutter_riverpod` | ^3.3.1 | State management (Riverpod) |
+| 8 | `cached_network_image` | ^3.4.1 | Cache gambar dari jaringan |
+| 9 | `google_fonts` | ^8.0.2 | Font dari Google Fonts |
+| 10 | `flutter_dotenv` | ^6.0.0 | Membaca file `.env` |
+| 11 | `shimmer` | ^3.0.0 | Efek loading shimmer/skeleton |
+| 12 | `intl` | ^0.20.2 | Formatting tanggal & angka (internationalization) |
+| 13 | `carousel_slider` | ^5.1.2 | Widget carousel/slider gambar |
+| 14 | `flutter_html` | ^3.0.0 | Render konten HTML di Flutter |
+| 15 | `riverpod_annotation` | ^4.0.2 | Annotation untuk riverpod_generator |
+| 16 | `share_plus` | 12.0.2 | Berbagi konten ke aplikasi lain |
+| 17 | `file_picker` | ^8.1.2 | Memilih file dari perangkat |
+| 18 | `url_launcher` | ^6.3.2 | Membuka URL di browser/eksternal |
+| 19 | `shared_preferences` | ^2.5.5 | Penyimpanan data lokal sederhana (key-value) |
+
+### Dev Dependencies (Development Only)
+| No | Package | Versi | Fungsi |
+|----|---------|-------|--------|
+| 1 | `flutter_test` | SDK | Framework testing Flutter |
+| 2 | `flutter_lints` | ^6.0.0 | Aturan lint/code quality |
+| 3 | `riverpod_generator` | ^4.0.3 | Code generation untuk Riverpod providers |
+| 4 | `build_runner` | ^2.15.0 | Tool untuk menjalankan code generation |
+
+---
+
 ## 🏗️ Struktur Proyek (Garis Besar)
 - `lib/config/` — Tempat konfigurasi routing (menggunakan `go_router`).
 - `lib/models/` — Mendefinisikan struktur data (*Class Models*) yang digunakan dalam aplikasi.
